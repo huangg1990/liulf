@@ -8,4 +8,7 @@ import org.springframework.stereotype.Controller;
 @Controller
 public abstract class CRMBaseController extends BaseController {
     protected static final Logger log = LoggerFactory.getLogger(CRMBaseController.class);
+
+
+
 }
