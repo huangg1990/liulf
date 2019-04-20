@@ -17,16 +17,16 @@ spring:
 #    password: root
 #    data-source-name: otherdb
 
-#spring.datasource.crm.driver-class: com.mysql.jdbc.Driver
-#spring.datasource.crm.jdbc-url:  jdbc:mysql://127.0.0.1:3306/crm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
-#spring.datasource.crm.username:  root
-#spring.datasource.crm.password:  root
-#spring.datasource.crm.max-wait:  10000
-#spring.datasource.crm.min-idle:  8
-#spring.datasource.crm.initial-size:  2
-#spring.datasource.crm.validation-query:  SELECT 1
-#spring.datasource.crm.test-on-borrow:  true
-#spring.datasource.crm.test-while-idle:  true
-#spring.datasource.crm.time-between-eviction-runs-millis:  18800
-#spring.datasource.crm.remove-abandoned:  true
-#spring.datasource.crm.jdbc-interceptors:  ConnectionState;SlowQueryReport(threshold=10)
+spring.datasource.liulf.driver-class: com.mysql.jdbc.Driver
+spring.datasource.liulf.jdbc-url:  jdbc:mysql://127.0.0.1:3306/liulf_crm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+spring.datasource.liulf.username:  root
+spring.datasource.liulf.password:  root
+spring.datasource.liulf.max-wait:  10000
+spring.datasource.liulf.min-idle:  8
+spring.datasource.liulf.initial-size:  2
+spring.datasource.liulf.validation-query:  SELECT 1
+spring.datasource.liulf.test-on-borrow:  true
+spring.datasource.liulf.test-while-idle:  true
+spring.datasource.liulf.time-between-eviction-runs-millis:  18800
+spring.datasource.liulf.remove-abandoned:  true
+spring.datasource.liulf.jdbc-interceptors:  ConnectionState;SlowQueryReport(threshold=10)
