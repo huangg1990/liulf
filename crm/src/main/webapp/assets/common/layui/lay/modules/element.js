@@ -96,7 +96,6 @@ layui.define('jquery', function(exports){
         ,call = {
             //Tab点击
             tabClick: function(e, index, liElem, options){
-                debugger;
                 options = options || {};
                 var othis = liElem || $(this)
                     ,index = index || othis.parent().children('li').index(othis)

@@ -90,8 +90,7 @@ public class CommodityCategoryController extends CRMBaseController {
 
     }
 
-    @Permission
-    @RequestMapping("/edit")
+    @RequestMapping("/view_update")
     public String eidt(@RequestParam("category_id") Long category_id) {
         if (ToolUtil.isEmpty(category_id)) {
             throw new RequestEmptyException();

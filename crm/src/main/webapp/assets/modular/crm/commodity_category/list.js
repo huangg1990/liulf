@@ -17,7 +17,7 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
      */
     dataTable.initColumn = function () {
         return [[
-            //{type: 'checkbox'},
+            {type: 'checkbox'},
             {field: 'category_id', hide: true, sort: true, title: 'id'},
             {field: 'code', sort: true, title: '分类编码'},
             {field: 'category_name', sort: true, title: '分类名称'},

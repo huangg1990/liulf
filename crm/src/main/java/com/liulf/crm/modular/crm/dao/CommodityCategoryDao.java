@@ -60,7 +60,7 @@ public class CommodityCategoryDao extends BaseDao {
 
     private final static String deleteById_sql=
             "update dat_commodity_category\n" +
-                    "set `delete_flag`='N',`update_time`=?,`update_user`=?\n" +
+                    "set `delete_flag`='Y',`update_time`=?,`update_user`=?\n" +
                     "where `category_id` in (#ids#);";
     public void deleteById(List<Long> ids, Long userid){
         String tempSql=deleteById_sql.replace("#ids#",Joiner.on(",").join(ids));
