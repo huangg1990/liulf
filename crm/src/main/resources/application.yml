@@ -1,0 +1,43 @@
+server:
+  port: 8080
+  max-http-header-size: 10240
+
+ybj:
+  swagger-open: true                #是否开启swagger (true/false)
+  kaptcha-open: false               #是否开启登录时验证码 (true/false)
+  spring-session-open: false        #是否开启spring session,如果是多机环境需要开启(true/false)
+  session-invalidate-time: 1800     #session失效时间(只在单机环境下生效，多机环境在SpringSessionConfig类中配置) 单位：秒
+  session-validation-interval: 900   #多久检测一次失效的session(只在单机环境下生效) 单位：秒
+  file-upload-path:  images
+
+beetl:
+  resource-auto-check: true         #热加载beetl模板，开发时候用
+
+spring:
+  profiles:
+    active: local
+  mvc:
+    view:
+      prefix: /pages
+  devtools:
+    restart:
+      enabled: false
+      additional-paths: src/main/java
+      exclude: assets/**,pages/**
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 100MB
+
+mybatis-plus:
+  typeAliasesPackage: com.liulf.crm.modular.system.model
+
+#spring boot 2.0 版本已经 把  /info 移动到了   /actuator/info  ,  通过如下配置恢复 /info
+management.endpoints.web.base-path: /
+
+
+log:
+  path: crm-logs
+
+
+# city_data  https://6c65-leeson-a5fee7-1257914072.tcb.qcloud.la/666/cityDataArr.json?sign=30a3c877aeb945f6b6e0419237fb126b&t=1541577824

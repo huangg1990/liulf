@@ -1,0 +1,32 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/liulf_crm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+    username: root
+    password: root
+    filters: wall,mergeStat
+    data-source-name: crm
+
+#多数据源情况的配置
+#crm:
+#  muti-datasource:
+#    open: false
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://127.0.0.1:3306/ybj_test_db?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+#    username: root
+#    password: root
+#    data-source-name: otherdb
+
+#spring.datasource.crm.driver-class: com.mysql.jdbc.Driver
+#spring.datasource.crm.jdbc-url:  jdbc:mysql://127.0.0.1:3306/crm?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=CTT
+#spring.datasource.crm.username:  root
+#spring.datasource.crm.password:  root
+#spring.datasource.crm.max-wait:  10000
+#spring.datasource.crm.min-idle:  8
+#spring.datasource.crm.initial-size:  2
+#spring.datasource.crm.validation-query:  SELECT 1
+#spring.datasource.crm.test-on-borrow:  true
+#spring.datasource.crm.test-while-idle:  true
+#spring.datasource.crm.time-between-eviction-runs-millis:  18800
+#spring.datasource.crm.remove-abandoned:  true
+#spring.datasource.crm.jdbc-interceptors:  ConnectionState;SlowQueryReport(threshold=10)
