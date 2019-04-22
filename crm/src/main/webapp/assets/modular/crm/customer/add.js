@@ -4,37 +4,30 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     var $ax = layui.ax;
     var form = layui.form;
     var admin = layui.admin;
-    var laydate = layui.laydate;
-    var layer = layui.layer;
-
-    //获取信息
-    var ajax = new $ax(Feng.ctxPath + "/manufacturer/detail/" + Feng.getUrlParam("manufacturer_id"));
-    var result = ajax.start();
-
-    debugger
-    form.val('editForm', result);
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/manufacturer/update", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/customer/add", function (data) {
             if(data.success){
-                Feng.success("操作成功！");
+                Feng.success("添加成功！");
                 //传给上个页面，刷新table用
                 admin.putTempData('formOk', true);
                 //关掉对话框
                 admin.closeThisDialog();
             }else{
-                Feng.error("操作失败！" + data.responseJSON.message);
+                Feng.error("添加失败！" + data.responseJSON.message);
             }
         }, function (data) {
-            Feng.error("操作成功！" + data.responseJSON.message)
+            Feng.error("添加失败！" + data.responseJSON.message)
         });
+
         var isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;//手机号码
         var isMob= /^0?1[3|4|5|8][0-9]\d{8}$/;// 座机格式
-        if(!isPhone.test( data.field.manufacturer_phone) && !isMob.test(data.field.manufacturer_phone)){
+        if(!isPhone.test( data.field.customer_phone) && !isMob.test(data.field.customer_phone)){
             Feng.error(" 固定电话或手机 格式有误！");
             return false;
         }
+
         ajax.set(data.field);
         ajax.start();
     });
@@ -62,9 +55,9 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         $("#"+id).find("option").remove();
         form.render();
     };
-    initSelect("","province", 100000, 1,result.province);
-    initSelect("","city", result.province, 2,result.city);
-    initSelect("","area", result.city, 3,result.area);
+
+    initSelect("","province", 100000, 1);
+    initSelect("性别","gender", undefined, 0,"",Feng.ctxPath +"/extdict/list?pcode=SEX");
 
     form.on('select(province)', function(data){
         clear_select("city");
@@ -75,6 +68,4 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         clear_select("area");
         initSelect("","area",data.value,3);
     });
-
-    initSelect("","province", 100000, 1,result.province);
 });

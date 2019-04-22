@@ -20,15 +20,23 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         }, function (data) {
             Feng.error("添加失败！" + data.responseJSON.message)
         });
+
+        var isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;//手机号码
+        var isMob= /^0?1[3|4|5|8][0-9]\d{8}$/;// 座机格式
+        if(!isPhone.test( data.field.manufacturer_phone) && !isMob.test(data.field.manufacturer_phone)){
+            Feng.error(" 固定电话或手机 格式有误！");
+            return false;
+        }
+
         ajax.set(data.field);
         ajax.start();
     });
 
-    var initSelect = function (id, pid, levelType,selectval,url) {
+    var initSelect = function (title,id, pid, levelType,selectval,url) {
         $("#" + id).find("option").remove();
         var ctobj=document.getElementById(id);
-        ctobj.options.add(new Option("请选择","",true,true));
-        if (url == undefined) { url="/sys_city/listdata";  }
+        ctobj.options.add(new Option("请选择"+title,"",true,true));
+        if (url == undefined) {  url="/sys_city/listdata";  }
         $.post(url, {pid: pid, levelType: levelType},
             function (rs) {
                 if (rs.data.length <= 0) { return; }
@@ -42,20 +50,21 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
                 form.render();
             });
     };
+
     var clear_select=function(id){
         $("#"+id).find("option").remove();
         form.render();
     };
 
-    initSelect("province", 100000, 1);
+    initSelect("","province", 100000, 1);
 
     form.on('select(province)', function(data){
         clear_select("city");
         clear_select("area");
-        initSelect("city",data.value,2);
+        initSelect("","city",data.value,2);
     });
     form.on('select(city)', function(data){
         clear_select("area");
-        initSelect("area",data.value,3);
+        initSelect("","area",data.value,3);
     });
 });

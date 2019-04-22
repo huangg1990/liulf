@@ -8,7 +8,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     var layer = layui.layer;
 
     //获取信息
-    var ajax = new $ax(Feng.ctxPath + "/manufacturer/detail/" + Feng.getUrlParam("manufacturer_id"));
+    var ajax = new $ax(Feng.ctxPath + "/customer/detail/" + Feng.getUrlParam("customer_id"));
     var result = ajax.start();
 
     debugger
@@ -16,7 +16,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
-        var ajax = new $ax(Feng.ctxPath + "/manufacturer/update", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/customer/update", function (data) {
             if(data.success){
                 Feng.success("操作成功！");
                 //传给上个页面，刷新table用
@@ -31,7 +31,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         });
         var isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;//手机号码
         var isMob= /^0?1[3|4|5|8][0-9]\d{8}$/;// 座机格式
-        if(!isPhone.test( data.field.manufacturer_phone) && !isMob.test(data.field.manufacturer_phone)){
+        if(!isPhone.test( data.field.customer_phone) && !isMob.test(data.field.customer_phone)){
             Feng.error(" 固定电话或手机 格式有误！");
             return false;
         }
@@ -65,6 +65,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     initSelect("","province", 100000, 1,result.province);
     initSelect("","city", result.province, 2,result.city);
     initSelect("","area", result.city, 3,result.area);
+    initSelect("性别","gender", undefined, 0,result.gender,Feng.ctxPath +"/extdict/list?pcode=SEX");
 
     form.on('select(province)', function(data){
         clear_select("city");
@@ -73,7 +74,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     });
     form.on('select(city)', function(data){
         clear_select("area");
-        initSelect("","area",data.value,3);
+        initSelect("area",data.value,3);
     });
 
     initSelect("","province", 100000, 1,result.province);
