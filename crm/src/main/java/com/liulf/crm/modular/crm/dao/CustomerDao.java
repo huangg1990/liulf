@@ -14,7 +14,6 @@ import java.util.List;
 
 @Component
 public class CustomerDao extends BaseDao {
-
     private final static String save_sql=
             "insert into dat_customer(\n" +
                     "`customer_name`,\n" +
@@ -23,7 +22,9 @@ public class CustomerDao extends BaseDao {
                     "`area`,\n" +
                     "`customer_phone`,\n" +
                     "`customer_car_card`,\n" +
-                    "`car_id`,\n" +
+                    "`car_brand_id`,\n" +
+                    "`car_serial_id`,\n" +
+                    "`car_basic_id`,\n" +
                     "`customer_addr`,\n" +
                     "`gender`,"+
                     "`note`,\n" +
@@ -32,7 +33,7 @@ public class CustomerDao extends BaseDao {
                     "`create_user`,\n" +
                     "`update_time`,\n" +
                     "`update_user`)\n" +
-                    "values(?,?,?,?,? ,?,?,?,?,?, ?,?,?,?,?);";
+                    "values(?,?,?,?,? ,?,?,?,?,?, ?,?,?,?,?,?,?);";
     public void save(Customer entity){
         Object[] para=new Object[]{
                 entity.getCustomer_name(),
@@ -41,7 +42,9 @@ public class CustomerDao extends BaseDao {
                 entity.getArea(),
                 entity.getCustomer_phone(),
                 entity.getCustomer_car_card(),
-                entity.getCar_id(),
+                entity.getCar_brand_id(),
+                entity.getCar_serial_id(),
+                entity.getCar_basic_id(),
                 entity.getCustomer_addr(),
                 entity.getGender()+"",
                 entity.getNote(),
@@ -62,7 +65,9 @@ public class CustomerDao extends BaseDao {
                     "`area`=?,\n" +
                     "`customer_phone`=?,\n" +
                     "`customer_car_card`=?,\n" +
-                    "`car_id`=?,\n" +
+                    "`car_brand_id`=?,\n" +
+                    "`car_serial_id`=?,\n" +
+                    "`car_basic_id`=?,\n" +
                     "`customer_addr`=?,\n" +
                     "`gender`=?,"+
                     "`note`=?,\n" +
@@ -77,7 +82,9 @@ public class CustomerDao extends BaseDao {
                 entity.getArea(),
                 entity.getCustomer_phone(),
                 entity.getCustomer_car_card(),
-                entity.getCar_id(),
+                entity.getCar_brand_id(),
+                entity.getCar_serial_id(),
+                entity.getCar_basic_id(),
                 entity.getCustomer_addr(),
                 entity.getGender()+"",
                 entity.getNote(),
@@ -108,7 +115,9 @@ public class CustomerDao extends BaseDao {
                     "`area`,\n" +
                     "`customer_phone`,\n" +
                     "`customer_car_card`,\n" +
-                    "`car_id`,\n" +
+                    "`car_brand_id`,\n" +
+                    "`car_serial_id`,\n" +
+                    "`car_basic_id`,\n" +
                     "`customer_addr`,\n" +
                     "`gender`,"+
                     "`note`,\n" +
@@ -151,9 +160,9 @@ public class CustomerDao extends BaseDao {
         if (!ToolUtil.isEmpty(entity.getCustomer_car_card())) {
             whereList.add(" `customer_car_card`  like '%" +entity.getCustomer_car_card() + "%'");
         }
-        if (!ToolUtil.isEmpty(entity.getCar_id())) {
+        if (!ToolUtil.isEmpty(entity.getCar_basic_id())) {
             whereList.add(" `car_id`=? ");
-            queryPara.add(entity.getCar_id());
+            queryPara.add(entity.getCar_basic_id());
         }
         if (!ToolUtil.isEmpty(entity.getProvince())) {
             whereList.add(" `province`=? ");
@@ -188,7 +197,9 @@ public class CustomerDao extends BaseDao {
                     "`area`,\n" +
                     "`customer_phone`,\n" +
                     "`customer_car_card`,\n" +
-                    "`car_id`,\n" +
+                    "`car_brand_id`,\n" +
+                    "`car_serial_id`,\n" +
+                    "`car_basic_id`,\n" +
                     "`customer_addr`,\n" +
                     "`gender`,"+
                     "`note`,\n" +

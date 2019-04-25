@@ -68,4 +68,17 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         clear_select("area");
         initSelect("","area",data.value,3);
     });
+
+
+    initSelect("品牌","car_brand_id", undefined, 0,"",Feng.ctxPath +"/car/car_brand_select");
+    form.on('select(car_brand_id)', function(data){
+        clear_select("car_serial_id");
+        clear_select("car_basic_id");
+        initSelect("子品牌","car_serial_id", data.value, 0,"",Feng.ctxPath +"/car/car_serial_select");
+    });
+    form.on('select(car_serial_id)', function(data){
+        clear_select("car_basic_id");
+        initSelect("车款","car_basic_id", data.value, 0,"",Feng.ctxPath +"/car/car_basic_select");
+    });
+
 });
