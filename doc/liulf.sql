@@ -1,7 +1,7 @@
 -- 商品类别
 DROP TABLE IF EXISTS `dat_commodity_category`;
  CREATE TABLE `dat_commodity_category` (
- `category_id` INT(10) NOT NULL NOT NULL AUTO_INCREMENT COMMENT '商品类别ID',
+ `category_id` INT(10) NOT NULL  AUTO_INCREMENT COMMENT '商品类别ID',
  `code` VARCHAR(32) DEFAULT NULL COMMENT '商品类编码',
  `category_name` VARCHAR(128) DEFAULT NULL COMMENT '商品类别名称',
  `note` VARCHAR(1024) DEFAULT NULL COMMENT '备注',
@@ -16,7 +16,7 @@ DROP TABLE IF EXISTS `dat_commodity_category`;
 -- 厂商
 DROP TABLE IF EXISTS `dat_manufacturer`;
  CREATE TABLE `dat_manufacturer` (
-  `manufacturer_id` INT(10) NOT NULL NOT NULL AUTO_INCREMENT COMMENT '厂商ID',
+  `manufacturer_id` INT(10) NOT NULL AUTO_INCREMENT COMMENT '厂商ID',
   `manufacturer_name` VARCHAR(128) DEFAULT NULL COMMENT '厂商名称',
   `province` varchar(20) DEFAULT NULL COMMENT '省',
   `city` varchar(20) DEFAULT NULL COMMENT '市',
@@ -33,6 +33,24 @@ DROP TABLE IF EXISTS `dat_manufacturer`;
   `update_time` DATETIME DEFAULT NULL COMMENT '修改时间',
   `update_user` INT(10) DEFAULT NULL COMMENT '修改用户ID',
   PRIMARY KEY (`manufacturer_id`) USING BTREE
+ ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
+
+
+ -- 厂商业务员
+DROP TABLE IF EXISTS `dat_manufacturer_sales`;
+ CREATE TABLE `dat_manufacturer_sales` (
+  `sales_id` INT(10) NOT NULL NOT NULL AUTO_INCREMENT COMMENT '厂商业务员ID',
+  `manufacturer_id` INT(10) NOT NULL  COMMENT '厂商ID',
+  `sales_name` VARCHAR(128) DEFAULT NULL COMMENT '厂商业务员姓名',
+  `sales_addr` VARCHAR(128) DEFAULT NULL COMMENT '厂商业务员地址',
+  `sales_phone` VARCHAR(128) DEFAULT NULL COMMENT '厂商业务员电话',
+  `note` VARCHAR(1024) DEFAULT NULL COMMENT '备注',
+  `delete_flag` VARCHAR(1) DEFAULT NULL COMMENT '删除标志位 N 未删除  Y 已删除',
+  `create_time` DATETIME DEFAULT NULL COMMENT '创建时间',
+  `create_user` INT(10) DEFAULT NULL COMMENT '创建用户ID',
+  `update_time` DATETIME DEFAULT NULL COMMENT '修改时间',
+  `update_user` INT(10) DEFAULT NULL COMMENT '修改用户ID',
+  PRIMARY KEY (`sales_id`) USING BTREE
  ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
 -- 客户表
