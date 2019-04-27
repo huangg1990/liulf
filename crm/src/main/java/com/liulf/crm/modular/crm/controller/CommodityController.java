@@ -13,8 +13,8 @@ import com.liulf.crm.core.log.LogObjectHolder;
 import com.liulf.crm.core.shiro.ShiroKit;
 import com.liulf.crm.core.shiro.ShiroUser;
 import com.liulf.crm.core.util.BeanUtil;
-import com.liulf.crm.modular.crm.entity.CommodityCategory;
-import com.liulf.crm.modular.crm.service.CommodityCategoryService;
+import com.liulf.crm.modular.crm.entity.Commodity;
+import com.liulf.crm.modular.crm.service.CommodityService;
 import com.liulf.crm.modular.system.warpper.LogWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,12 +31,12 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
-@RequestMapping("/commodity_category")
-public class CommodityCategoryController extends CRMBaseController {
-    private final static String PREFIX = "/modular/crm/commodity_category/";
+@RequestMapping("/commodity")
+public class CommodityController extends CRMBaseController {
+    private final static String PREFIX = "/modular/crm/commodity/";
 
     @Autowired
-    CommodityCategoryService commodityCategoryService;
+    CommodityService CommodityService;
 
     @RequestMapping("/list")
     public String index() {
@@ -51,15 +51,15 @@ public class CommodityCategoryController extends CRMBaseController {
     @RequestMapping("/listdata")
     @Permission
     @ResponseBody
-    public Object listData(@Valid CommodityCategory entity, BindingResult bindingResult) {
+    public Object listData(@Valid Commodity entity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
         }
         //获取分页参数
         Page page = LayuiPageFactory.defaultPage();
         try{
-            long total = commodityCategoryService.getPageCount(entity);
+            long total = CommodityService.getPageCount(entity);
             page.setTotal(total);
-            List<CommodityCategory> listData = commodityCategoryService.getPageList(page, entity);
+            List<Commodity> listData = CommodityService.getPageList(page, entity);
             List<Map<String, Object>> result = BeanUtil.transBean2MapList(listData);
             page.setRecords(new LogWrapper(result).wrap());
         }catch (Exception e){
@@ -67,14 +67,14 @@ public class CommodityCategoryController extends CRMBaseController {
         }
         return LayuiPageFactory.createPageInfo(page);
     }
-    @RequestMapping("/view_add")
+    @RequestMapping("/add")
     public String addView() {
         return PREFIX + "add.html";
     }
-    @RequestMapping(value = "/add")
+    @RequestMapping(value = "/save")
     @Permission
     @ResponseBody
-    public ResponseData add(@Valid CommodityCategory entity, BindingResult bindingResult) {
+    public ResponseData save(@Valid Commodity entity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
@@ -82,21 +82,21 @@ public class CommodityCategoryController extends CRMBaseController {
             ShiroUser user = ShiroKit.getUser();
             entity.setUpdate_user(user.getId());
             entity.setCreate_user(user.getId());
-            commodityCategoryService.save(entity);
+            CommodityService.save(entity);
             return SUCCESS_TIP;
         }catch (Exception e){
-            log.error("firstpage/add -error",e);
+            log.error("commodity/add -error",e);
             throw new RequestEmptyException("服务异常！");
         }
 
     }
 
-    @RequestMapping("/view_update")
-    public String eidt(@RequestParam("category_id") Long category_id) {
-        if (ToolUtil.isEmpty(category_id)) {
+    @RequestMapping("/edit")
+    public String eidt(@RequestParam("commodity_id") Long commodity_id) {
+        if (ToolUtil.isEmpty(commodity_id)) {
             throw new RequestEmptyException();
         }
-        CommodityCategory entity = commodityCategoryService.getById(category_id);
+        Commodity entity = CommodityService.getById(commodity_id);
         LogObjectHolder.me().set(entity);
         return PREFIX + "edit.html";
     }
@@ -104,14 +104,14 @@ public class CommodityCategoryController extends CRMBaseController {
     @RequestMapping(value = "/update")
     @Permission
     @ResponseBody
-    public ResponseData update(@Valid CommodityCategory entity , BindingResult result) {
+    public ResponseData update(@Valid Commodity entity , BindingResult result) {
         if (result.hasErrors()) {
             throw new ServiceException(BizExceptionEnum.REQUEST_NULL);
         }
         try {
             ShiroUser user = ShiroKit.getUser();
             entity.setUpdate_user(user.getId());
-            commodityCategoryService.update(entity);
+            CommodityService.update(entity);
             return SUCCESS_TIP;
         } catch (Exception e) {
             log.error("community/update -error", e);
@@ -119,11 +119,11 @@ public class CommodityCategoryController extends CRMBaseController {
         }
     }
 
-    @RequestMapping(value = "/detail/{category_id}")
+    @RequestMapping(value = "/detail/{commodity_id}")
     @Permission
     @ResponseBody
-    public Object detail(@PathVariable("category_id") Long category_id) {
-        CommodityCategory entity = commodityCategoryService.getById(category_id);
+    public Object detail(@PathVariable("commodity_id") Long commodity_id) {
+        Commodity entity = CommodityService.getById(commodity_id);
         return entity;
     }
 
@@ -139,10 +139,10 @@ public class CommodityCategoryController extends CRMBaseController {
             for (String id : arrIds) {
                 listIds.add(Long.parseLong(id));
             }
-            commodityCategoryService.deleteById(listIds, user.getId());
+            CommodityService.deleteById(listIds, user.getId());
             return SUCCESS_TIP;
         }catch (Exception e){
-            log.error("firstpage/delete -error",e);
+            log.error("commodity/delete -error",e);
             throw new RequestEmptyException("服务异常！");
         }
     }
@@ -150,16 +150,20 @@ public class CommodityCategoryController extends CRMBaseController {
     @RequestMapping("/select")
     @ResponseBody
     public Object select(String pid) {
+
+        if (ToolUtil.isEmpty(pid)) {
+            throw new RequestEmptyException("参数错误！");
+        }
         Map<String, Object> map = new HashMap<>();
         try {
-            List<CommodityCategory> list = commodityCategoryService.getAllList();
+            List<Commodity> list = CommodityService.getByCategoryId(pid);
 
             List<JSONObject> data = new ArrayList<>();
             if (list != null) {
-                for (CommodityCategory item : list) {
+                for (Commodity item : list) {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("value", item.getCategory_id());
-                    jsonObject.put("name", item.getCategory_name());
+                    jsonObject.put("value", item.getCommodity_id());
+                    jsonObject.put("name", item.getCommodity_name());
                     data.add(jsonObject);
                 }
             }
@@ -168,13 +172,12 @@ public class CommodityCategoryController extends CRMBaseController {
             map.put("data", data);
 
         } catch (Exception e) {
-            log.error("commodity_category/select", e);
+            log.error("commodity/select", e);
             throw new RequestEmptyException("服务异常！");
         }
 
         return map;
     }
-
 
 
 }

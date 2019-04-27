@@ -62,7 +62,7 @@ public class ManufacturerSalesDao extends BaseDao {
                 entity.getManufacturer_id(),
                 entity.getSales_name(),
                 entity.getSales_addr(),
-                entity.getSales_phone(), 
+                entity.getSales_phone(),
                 entity.getNote(),
                 new Date(),
                 entity.getUpdate_user(),

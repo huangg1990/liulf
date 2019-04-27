@@ -13,19 +13,17 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
     };
 
     /**
-     * 初始化表格的列 厂商
+     * 初始化表格的列
      */
     dataTable.initColumn = function () {
         return [[
             {type: 'checkbox'},
-            {field: 'manufacturer_id', hide: true, sort: true, title: 'id'},
-            {field: 'manufacturer_name', sort: true, title: '厂商名称'},
-            {field: 'province', sort: true, title: '省份'},
-            {field: 'city', sort: true, title: '市'},
-            {field: 'area', sort: true, title: '区/县'},
-            {field: 'manufacturer_phone', sort: true, title: '电话'},
+            {field: 'commodity_id', hide: true, sort: true, title: 'id'},
+            {field: 'category_name', sort: true, title: '分类名称'},
+            {field: 'commodity_code', sort: true, title: '商品编码'},
+            {field: 'commodity_name', sort: true, title: '商品名称'},
             {field: 'delete_flag', sort: true, title: '状态',templet: function (d) {
-                if(d.delete_flag =='Y'){  return "<span>已删除</span>";  }else{ return "<span>正常</span>"; }
+                if(d.delete_flag =='Y'){  return "<span>已作废</span>";  }else{ return "<span>正常</span>"; }
              } },
             {field: 'create_time', sort: true, title: '创建时间'},
             {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 200}
@@ -51,9 +49,9 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
         admin.putTempData('formOk', false);
         top.layui.admin.open({
             type: 2,
-            title: '编辑厂商',
-            area: ['800px', '640px'],
-            content: Feng.ctxPath + '/manufacturer/view_update?manufacturer_id=' + data.manufacturer_id,
+            title: '编辑商品',
+            area: ['800px', '440px'],
+            content: Feng.ctxPath + '/commodity/edit?commodity_id=' + data.commodity_id,
             end: function () {
                 admin.getTempData('formOk') && table.reload(dataTable.tableId);
             }
@@ -67,33 +65,32 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
     dataTable.onDelete = function (data) {
         debugger;
         var operation = function () {
-            var ajax = new $ax(Feng.ctxPath + "/manufacturer/delete", function (data) {
+            var ajax = new $ax(Feng.ctxPath + "/commodity/delete", function (data) {
                 if(data.success){
                     table.reload(dataTable.tableId);
-                    Feng.success("删除成功!");
+                    Feng.success("作废成功!");
                 }else{
-                    Feng.error("删除失败!" + data.message + "!");
+                    Feng.error("作废失败!" + data.message + "!");
                 }
             }, function (data) {
                 debugger;
-                Feng.error("删除失败!" + data.responseJSON.message + "!");
+                Feng.error("作废失败!" + data.responseJSON.message + "!");
             });
-            ajax.set("ids", data.manufacturer_id);
+            ajax.set("ids", data.commodity_id);
             ajax.start();
         };
-        Feng.confirm("是否删除【" + data.manufacturer_name + "】厂商?", operation);
+        Feng.confirm("是否作废【" + data.commodity_name + "】商品?", operation);
     };
+
 
     /**
      * 点击查询按钮
      */
     dataTable.search = function () {
         var queryData = {};
-        queryData['manufacturer_name'] = $("#manufacturer_name").val();
-        queryData['province'] = $("#province").val();
-        queryData['city'] = $("#city").val();
-        queryData['area'] = $("#area").val();
-        queryData['manufacturer_phone'] = $("#manufacturer_phone").val();
+        queryData['commodity_name'] = $("#commodity_name").val();
+        queryData['commodity_code'] = $("#commodity_code").val();
+        queryData['category_id'] = $("#category_id").val();
         table.reload(dataTable.tableId, {where: queryData});
     };
 
@@ -104,9 +101,9 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
         admin.putTempData('formOk', false);
         top.layui.admin.open({
             type: 2,
-            title: '添加厂商',
-            area: ['800px', '640px'],
-            content: Feng.ctxPath + '/manufacturer/view_add',
+            title: '添加商品',
+            area: ['800px', '440px'],
+            content: Feng.ctxPath + '/commodity/add',
             end: function () {
                 admin.getTempData('formOk') && table.reload(dataTable.tableId);
             }
@@ -117,20 +114,20 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
     dataTable.deleteBatch = function () {
         var checkRows = table.checkStatus(dataTable.tableId);
         if (checkRows.data.length === 0) {
-            Feng.error("请选择要删除的数据");
+            Feng.error("请选择要作废的数据");
             return;
         }
         var ids = new Array();
         for (var i = 0; i < checkRows.data.length; i++) {
-            ids.push(checkRows.data[i]["manufacturer_id"]);
+            ids.push(checkRows.data[i]["commodity_id"]);
         }
 
-        Feng.confirm("是否删除选中的厂商?", function () {
-            var ajax = new $ax(Feng.ctxPath + "/manufacturer/delete", function (data) {
-                Feng.success("删除厂商成功!");
+        Feng.confirm("是否作废选中的商品?", function () {
+            var ajax = new $ax(Feng.ctxPath + "/commodity/delete", function (data) {
+                Feng.success("作废商品成功!");
                 dataTable.search();
             }, function (data) {
-                Feng.error("删除厂商失败!");
+                Feng.error("作废商品失败!");
             });
             ajax.set("ids", ids.join(','));
             ajax.start();
@@ -150,7 +147,7 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
     // 渲染表格
     var tableResult = table.render({
         elem: '#' + dataTable.tableId,
-        url: Feng.ctxPath + '/manufacturer/listdata',
+        url: Feng.ctxPath + '/commodity/listdata',
         page: true,
         height: "full-158",
         cellMinWidth: 100,
@@ -194,21 +191,5 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
             });
     };
 
-    var clear_select=function(id){
-        $("#"+id).find("option").remove();
-        form.render();
-    };
-
-    initSelect("","province", 100000, 1);
-
-    form.on('select(province)', function(data){
-        clear_select("city");
-        clear_select("area");
-        initSelect("","city",data.value,2);
-    });
-    form.on('select(city)', function(data){
-        clear_select("area");
-        initSelect("","area",data.value,3);
-    });
-    // ==========================省市级联========================== //
+    initSelect("商品分类","category_id", undefined, 0,"",Feng.ctxPath +"/commodity_category/select");
 });

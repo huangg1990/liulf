@@ -54,7 +54,7 @@ public class ManufacturerController extends CRMBaseController {
      * @Date 2018/12/23 5:34 PM
      */
     @RequestMapping("/listdata")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public Object listData(@Valid Manufacturer entity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -100,7 +100,7 @@ public class ManufacturerController extends CRMBaseController {
         return PREFIX + "add.html";
     }
     @RequestMapping(value = "/add")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public ResponseData add(@Valid Manufacturer entity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -130,7 +130,7 @@ public class ManufacturerController extends CRMBaseController {
     }
 
     @RequestMapping(value = "/update")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public ResponseData update(@Valid Manufacturer entity , BindingResult result) {
         if (result.hasErrors()) {
@@ -157,7 +157,7 @@ public class ManufacturerController extends CRMBaseController {
 
 
     @RequestMapping(value = "/delete")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public ResponseData delete(String ids) {
         ShiroUser user = ShiroKit.getUser();

@@ -23,7 +23,7 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
             {field: 'manufacturer_name', sort: true, title: '所属厂商'},
             {field: 'sales_phone', sort: true, title: '厂商业务员电话'},
             {field: 'delete_flag', sort: true, title: '状态',templet: function (d) {
-                if(d.delete_flag =='Y'){  return "<span>已作废</span>";  }else{ return "<span>正常</span>"; }
+                if(d.delete_flag =='Y'){  return "<span>已删除</span>";  }else{ return "<span>正常</span>"; }
              } },
             {field: 'create_time', sort: true, title: '创建时间'},
             {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 200}

@@ -2,6 +2,7 @@ package com.liulf.crm.modular.crm.dao;
 
 import cn.stylefeng.roses.core.util.ToolUtil;
 import com.google.common.base.Joiner;
+import com.liulf.crm.modular.crm.dao.BaseDao;
 import com.liulf.crm.modular.crm.entity.CommodityCategory;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;

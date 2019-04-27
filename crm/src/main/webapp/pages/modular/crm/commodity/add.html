@@ -1,0 +1,41 @@
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/crm/commodity/add.js"]}){
+<form id="addForm" lay-filter="addForm" class="layui-form model-form">
+    <div class="layui-form-item">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品分类<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <select name="category_id" id="category_id" lay-filter="category_id"> </select>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品编码<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" id="commodity_code" name="commodity_code" required lay-verify="required" placeholder="请输入分类编码"
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">商品名称<span style="color: red;">*</span></label>
+            <div class="layui-input-block">
+                <input type="text" id="commodity_name" name="commodity_name" required lay-verify="required"
+                       placeholder="请输入分类名称" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
+        <div class="layui-form-item layui-form-text">
+            <label class="layui-form-label">备注</label>
+            <div class="layui-input-block">
+                <textarea name="note" placeholder="请输入内容" class="layui-textarea"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item text-right">
+        <button class="layui-btn layui-btn-primary" type="button" ew-event="closeDialog">取消</button>
+        <button class="layui-btn" lay-filter="btnSubmit" lay-submit>保存</button>
+    </div>
+</form>
+@}

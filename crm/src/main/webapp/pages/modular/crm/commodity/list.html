@@ -1,7 +1,7 @@
-@layout("/common/_container.html",{js:["/assets/modular/crm/manufacturer/list.js"]}){
+@layout("/common/_container.html",{js:["/assets/modular/crm/commodity/list.js"]}){
 
 <div class="layui-body-header">
-    <span class="layui-body-header-title">厂商管理</span>
+    <span class="layui-body-header-title">商品类别管理</span>
 </div>
 
 <div class="layui-fluid">
@@ -12,29 +12,23 @@
                     <div class="layui-form toolbar">
                         <div class="layui-form-item">
                             <div class="layui-inline">
-                                <select name="province" id="province" lay-filter="province"> </select>
+                                <select name="category_id" id="category_id" lay-filter="category_id"> </select>
                             </div>
                             <div class="layui-inline">
-                                <select name="city" id="city" lay-filter="city"> </select>
+                                <input id="commodity_code" class="layui-input"   maxlength="20" type="text" placeholder="定位商品编码"/>
                             </div>
                             <div class="layui-inline">
-                                <select name="area" id="area" lay-filter="area"> </select>
-                            </div>
-                            <div class="layui-inline">
-                                <input id="manufacturer_name" class="layui-input"   maxlength="20" type="text" placeholder="定位厂商名称"/>
-                            </div>
-                            <div class="layui-inline">
-                                <input id="manufacturer_phone" class="layui-input"   maxlength="20" type="text" placeholder="定位厂商电话"/>
+                                <input id="commodity_name" class="layui-input"   maxlength="20" type="text" placeholder="定位商品名称"/>
                             </div>
                             <div class="layui-inline">
                                 <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
                                 </button>
-                                @if(shiro.hasPermission("/manufacturer/add")){
-                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加厂商
+                                @if(shiro.hasPermission("/commodity/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>添加商品
                                 </button>
                                 @}
-                                @if(shiro.hasPermission("/manufacturer/delete")){
-                                <button id="btnDeleteBatch" class="layui-btn icon-btn layui-btn-danger"><i class="layui-icon">&#xe67d;</i>批量删除</button>
+                                @if(shiro.hasPermission("/commodity/delete")){
+                                <button id="btnDeleteBatch" class="layui-btn icon-btn layui-btn-danger"><i class="layui-icon">&#xe67d;</i>批量作废</button>
                                 @}
                             </div>
                         </div>
@@ -51,7 +45,7 @@
 <script type="text/html" id="tableBar">
     {{# if (d.delete_flag == 'N'){ }}
         <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
-        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">作废</a>
     {{# }else {  }}
 
     {{# }  }}
