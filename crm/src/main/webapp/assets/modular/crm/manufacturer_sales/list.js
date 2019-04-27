@@ -197,16 +197,23 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
         form.render();
     };
 
-    initSelect("","province", 100000, 1);
+    initSelect("省份","province", 100000, 1); //
+
 
     form.on('select(province)', function(data){
         clear_select("city");
         clear_select("area");
-        initSelect("","city",data.value,2);
+        clear_select("manufacturer_id");
+        initSelect("城市","city",data.value,2);
     });
     form.on('select(city)', function(data){
         clear_select("area");
-        initSelect("","area",data.value,3);
+        clear_select("manufacturer_id");
+        initSelect("县/区","area",data.value,3);
+    });
+    form.on('select(area)', function (data) {
+        clear_select("manufacturer_id");
+        initSelect("厂商","manufacturer_id", data.value,4, undefined, Feng.ctxPath +"/manufacturer/select");
     });
     // ==========================省市级联========================== //
 });

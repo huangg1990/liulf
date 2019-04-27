@@ -13,9 +13,10 @@ public class ManufacturerSales extends BaseEntity implements Serializable {
     private String sales_phone;//电话
 
     /**
-     * 列表现实使用
+     * 列表显示使用
      */
     private String province;//` varchar(20) DEFAULT NULL COMMENT '省',
     private String city;//` varchar(20) DEFAULT NULL COMMENT '市',
     private String area;//` varchar(20) DEFAULT NULL COMMENT '城市编码',
+    private String manufacturer_name;
 }

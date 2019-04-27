@@ -31,7 +31,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         });
         var isPhone = /^([0-9]{3,4}-)?[0-9]{7,8}$/;//手机号码
         var isMob= /^0?1[3|4|5|8][0-9]\d{8}$/;// 座机格式
-        if(!isPhone.test( data.field.manufacturer_phone) && !isMob.test(data.field.manufacturer_phone)){
+        if(!isPhone.test( data.field.sales_phone) && !isMob.test(data.field.sales_phone)){
             Feng.error(" 固定电话或手机 格式有误！");
             return false;
         }
@@ -65,6 +65,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
     initSelect("","province", 100000, 1,result.province);
     initSelect("","city", result.province, 2,result.city);
     initSelect("","area", result.city, 3,result.area);
+    initSelect("厂商","manufacturer_id", result.area,4, result.manufacturer_id, Feng.ctxPath +"/manufacturer/select");
 
     form.on('select(province)', function(data){
         clear_select("city");
@@ -75,6 +76,20 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         clear_select("area");
         initSelect("","area",data.value,3);
     });
+    form.on('select(province)', function(data){
+        clear_select("city");
+        clear_select("area");
+        clear_select("manufacturer_id");
+        initSelect("城市","city",data.value,2);
+    });
+    form.on('select(city)', function(data){
+        clear_select("area");
+        clear_select("manufacturer_id");
+        initSelect("县/区","area",data.value,3);
+    });
+    form.on('select(area)', function (data) {
+        clear_select("manufacturer_id");
+        initSelect("厂商","manufacturer_id", data.value,4, undefined, Feng.ctxPath +"/manufacturer/select");
+    });
 
-    initSelect("","province", 100000, 1,result.province);
 });

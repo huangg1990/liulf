@@ -43,4 +43,6 @@ public class ManufacturerService  extends BaseService{
     public List<Manufacturer> getPageList(Page page , Manufacturer entity){
         return manufacturerDao.getPageList(page,entity);
     }
+
+
 }

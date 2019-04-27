@@ -62,8 +62,7 @@ public class ManufacturerSalesDao extends BaseDao {
                 entity.getManufacturer_id(),
                 entity.getSales_name(),
                 entity.getSales_addr(),
-                entity.getSales_phone(),
-                entity.getNote(),
+                entity.getSales_phone(), 
                 entity.getNote(),
                 new Date(),
                 entity.getUpdate_user(),
@@ -86,18 +85,24 @@ public class ManufacturerSalesDao extends BaseDao {
 
     private final static String getById_sql =
             "select \n" +
-                    "`sales_id`, \n"+
-                    "`manufacturer_id`,\n" +
-                    "`sales_name`,\n" +
-                    "`sales_addr`," +
-                    "`sales_phone`,\n" +
-                    "`note`,\n" +
-                    "`delete_flag`,\n" +
-                    "`create_time`,\n" +
-                    "`create_user`,\n" +
-                    "`update_time`,\n" +
-                    "`update_user` \n" +
-                    "from dat_manufacturer_sales where `delete_flag`='N' AND `ManufacturerSales_id`=?";
+                    "m.`province`,\n" +
+                    "m.`city`,"+
+                    "m.`area`,\n" +
+                    "m.`manufacturer_name`,\n" +
+                    "ms.`sales_id`, \n"+
+                    "ms.`manufacturer_id`,\n" +
+                    "ms.`sales_name`,\n" +
+                    "ms.`sales_addr`," +
+                    "ms.`sales_phone`,\n" +
+                    "ms.`note`,\n" +
+                    "ms.`delete_flag`,\n" +
+                    "ms.`create_time`,\n" +
+                    "ms.`create_user`,\n" +
+                    "ms.`update_time`,\n" +
+                    "ms.`update_user` \n" +
+                    "from dat_manufacturer_sales ms \n"+
+                    "inner join dat_manufacturer m\n" +
+                    "on ms.manufacturer_id=m.manufacturer_id  where ms.`delete_flag`='N' AND ms.`sales_id`=?";
 
     public ManufacturerSales getById(Long id) {
         List<ManufacturerSales> list = liulfJdbcTemplate.query(getById_sql, new Object[]{id},
@@ -153,6 +158,7 @@ public class ManufacturerSalesDao extends BaseDao {
                     "m.`province`,\n" +
                     "m.`city`,"+
                     "m.`area`,\n" +
+                    "m.`manufacturer_name`,\n" +
                     "ms.`sales_id`, \n"+
                     "ms.`manufacturer_id`,\n" +
                     "ms.`sales_name`,\n" +

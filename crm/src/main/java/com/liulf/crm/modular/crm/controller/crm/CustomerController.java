@@ -1,4 +1,4 @@
-package com.liulf.crm.modular.crm.controller;
+package com.liulf.crm.modular.crm.controller.crm;
 
 import cn.stylefeng.roses.core.reqres.response.ResponseData;
 import cn.stylefeng.roses.core.util.ToolUtil;
@@ -13,6 +13,7 @@ import com.liulf.crm.core.log.LogObjectHolder;
 import com.liulf.crm.core.shiro.ShiroKit;
 import com.liulf.crm.core.shiro.ShiroUser;
 import com.liulf.crm.core.util.BeanUtil;
+import com.liulf.crm.modular.crm.controller.CRMBaseController;
 import com.liulf.crm.modular.crm.entity.Customer;
 import com.liulf.crm.modular.crm.entity.Manufacturer;
 import com.liulf.crm.modular.crm.entity.SysCity;
@@ -55,7 +56,7 @@ public class CustomerController extends CRMBaseController {
      * @Date 2018/12/23 5:34 PM
      */
     @RequestMapping("/listdata")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public Object listData(@Valid Customer entity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -101,7 +102,7 @@ public class CustomerController extends CRMBaseController {
         return PREFIX + "add.html";
     }
     @RequestMapping(value = "/add")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public ResponseData add(@Valid Customer entity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -131,7 +132,7 @@ public class CustomerController extends CRMBaseController {
     }
 
     @RequestMapping(value = "/update")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public ResponseData update(@Valid Customer entity , BindingResult result) {
         if (result.hasErrors()) {
@@ -158,7 +159,7 @@ public class CustomerController extends CRMBaseController {
 
 
     @RequestMapping(value = "/delete")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public ResponseData delete(String ids) {
         ShiroUser user = ShiroKit.getUser();

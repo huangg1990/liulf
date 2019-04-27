@@ -29,7 +29,6 @@ public class SysCityController extends BaseController {
     private static final Logger log = LoggerFactory.getLogger(SysCityController.class);
 
     @RequestMapping("/listdata")
-    @Permission(Const.ADMIN_NAME)
     @ResponseBody
     public Object list(@RequestParam(required = false) int levelType,
                        @RequestParam(required = false) String pid) {
@@ -39,12 +38,12 @@ public class SysCityController extends BaseController {
     private Object getCityList(@RequestParam(required = false) int levelType, @RequestParam(required = false) String pid) {
         log.info("pid {}", pid);
 
-        List<SysCity> mstCommunityList = sysCityService.getSysCityByLevelTypeAndPid(levelType, Integer.valueOf(pid));
+        List<SysCity> sysCityList = sysCityService.getSysCityByLevelTypeAndPid(levelType, Integer.valueOf(pid));
 
         Map<String, Object> map = new HashMap<>();
         List<JSONObject> data = new ArrayList<>();
-        if (mstCommunityList != null) {
-            for (SysCity item : mstCommunityList) {
+        if (sysCityList != null) {
+            for (SysCity item : sysCityList) {
                 JSONObject jsonObject = new JSONObject();
                 jsonObject.put("value", item.getId());
                 jsonObject.put("name", item.getCity_name());

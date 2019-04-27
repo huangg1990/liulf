@@ -6,7 +6,6 @@ import cn.stylefeng.roses.kernel.model.exception.RequestEmptyException;
 import cn.stylefeng.roses.kernel.model.exception.ServiceException;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.liulf.crm.core.common.annotion.Permission;
-import com.liulf.crm.core.common.constant.Const;
 import com.liulf.crm.core.common.exception.BizExceptionEnum;
 import com.liulf.crm.core.common.page.LayuiPageFactory;
 import com.liulf.crm.core.log.LogObjectHolder;
@@ -53,7 +52,7 @@ public class ManufacturerSalesController extends CRMBaseController {
      * @Date 2018/12/23 5:34 PM
      */
     @RequestMapping("/listdata")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public Object listData(@Valid ManufacturerSales entity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -99,7 +98,7 @@ public class ManufacturerSalesController extends CRMBaseController {
         return PREFIX + "add.html";
     }
     @RequestMapping(value = "/add")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public ResponseData add(@Valid  ManufacturerSales entity, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -129,7 +128,7 @@ public class ManufacturerSalesController extends CRMBaseController {
     }
 
     @RequestMapping(value = "/update")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public ResponseData update(@Valid  ManufacturerSales entity , BindingResult result) {
         if (result.hasErrors()) {
@@ -156,7 +155,7 @@ public class ManufacturerSalesController extends CRMBaseController {
 
 
     @RequestMapping(value = "/delete")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public ResponseData delete(String ids) {
         ShiroUser user = ShiroKit.getUser();

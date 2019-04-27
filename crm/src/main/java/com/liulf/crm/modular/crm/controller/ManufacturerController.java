@@ -4,6 +4,7 @@ import cn.stylefeng.roses.core.reqres.response.ResponseData;
 import cn.stylefeng.roses.core.util.ToolUtil;
 import cn.stylefeng.roses.kernel.model.exception.RequestEmptyException;
 import cn.stylefeng.roses.kernel.model.exception.ServiceException;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.liulf.crm.core.common.annotion.Permission;
 import com.liulf.crm.core.common.constant.Const;
@@ -172,6 +173,39 @@ public class ManufacturerController extends CRMBaseController {
             log.error("firstpage/delete -error",e);
             throw new RequestEmptyException("服务异常！");
         }
+    }
+
+
+    @RequestMapping("/select")
+    @ResponseBody
+    public Object select(String pid) {
+
+        if (ToolUtil.isEmpty(pid)) {
+            throw new RequestEmptyException("参数错误！");
+        }
+        Map<String, Object> map = new HashMap<>();
+        try {
+            List<Manufacturer> manufacturerList = manufacturerService.getListByArea(pid);
+
+            List<JSONObject> data = new ArrayList<>();
+            if (manufacturerList != null) {
+                for (Manufacturer item : manufacturerList) {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("value", item.getManufacturer_id());
+                    jsonObject.put("name", item.getManufacturer_name());
+                    data.add(jsonObject);
+                }
+            }
+
+            map.put("status", 200);
+            map.put("data", data);
+
+        } catch (Exception e) {
+            log.error("manufacturer/select", e);
+            throw new RequestEmptyException("服务异常！");
+        }
+
+        return map;
     }
 
 

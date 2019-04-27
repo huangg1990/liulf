@@ -127,7 +127,7 @@ public class ManufacturerDao extends BaseDao {
 
     private final static String getListByArea_sql=
             "select \n" +
-                    "`manufacturer_id`\n"+
+                    "`manufacturer_id`,\n"+
                     "`manufacturer_name`\n" +
                     "from dat_manufacturer where `delete_flag`='N' AND `area`=?";
     public List<Manufacturer> getListByArea(String areaCode){

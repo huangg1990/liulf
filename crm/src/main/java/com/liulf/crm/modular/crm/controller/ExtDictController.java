@@ -28,7 +28,7 @@ public class ExtDictController {
     ExtDictService extDictService;
 
     @RequestMapping("/detail")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public Object getDict( String code  ) {
         Map<String, Object> map = new HashMap<>();
@@ -50,7 +50,7 @@ public class ExtDictController {
     }
 
     @RequestMapping("/list")
-    @Permission(Const.ADMIN_NAME)
+    @Permission
     @ResponseBody
     public Object getDictList( String pcode  ) {
 

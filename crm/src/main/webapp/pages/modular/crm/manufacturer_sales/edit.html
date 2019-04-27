@@ -1,6 +1,6 @@
 @layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/crm/manufacturer_sales/edit.js"]}){
-<form  id="editForm" lay-filter="editForm" class="layui-form model-form">
-    <input name="manufacturer_id" type="hidden"/>
+<form id="editForm" lay-filter="editForm" class="layui-form model-form">
+    <input name="sales_id" type="hidden"/>
     <div class="layui-form-item">
         <div class="layui-form-item">
             <label class="layui-form-label">地区选择<span style="color: red;">*</span></label>
@@ -15,47 +15,29 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">厂商名称<span style="color: red;">*</span></label>
+            <label class="layui-form-label">选择厂商<span style="color: red;">*</span></label>
             <div class="layui-input-block">
-                <input type="text" id="manufacturer_name" name="manufacturer_name" required lay-verify="required" placeholder="请输入厂商名称"
-                       autocomplete="off" class="layui-input">
+                <select name="manufacturer_id" id="manufacturer_id"  lay-verify="required"> </select>
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">厂商电话<span style="color: red;">*</span></label>
+            <label class="layui-form-label">业务员姓名<span style="color: red;">*</span></label>
             <div class="layui-input-inline">
-                <input type="text" id="manufacturer_phone" name="manufacturer_phone" required lay-verify="required" placeholder="请输入厂商电话"
+                <input type="text" id="sales_name" name="sales_name"   lay-verify="required" placeholder="请输入业务员姓名"
                        autocomplete="off" class="layui-input">
             </div>
-            <label class="layui-form-label">邮政编码</label>
+            <label class="layui-form-label">业务员电话<span style="color: red;">*</span></label>
             <div class="layui-input-inline">
-                <input type="text" id="manufacturer_post" name="manufacturer_post"  placeholder="请输入邮政编码"
-                       autocomplete="off" class="layui-input">
+                <input type="text" id="sales_phone" name="sales_phone"   placeholder="请输入业务员电话"   lay-verify="required" autocomplete="off" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">厂商地址<span style="color: red;">*</span></label>
+            <label class="layui-form-label">业务员地址</label>
             <div class="layui-input-block">
-                <input type="text" id="manufacturer_addr" name="manufacturer_addr" required lay-verify="required" placeholder="请输入厂商地址"
+                <input type="text" id="sales_addr" name="sales_addr"  placeholder="请输入业务员地址"
                        autocomplete="off" class="layui-input">
             </div>
         </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">银行账户</label>
-            <div class="layui-input-block">
-                <input type="text" id="manufacturer_band_account" name="manufacturer_band_account"  placeholder="请输入银行账户"
-                       autocomplete="off" class="layui-input">
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">联络部门</label>
-            <div class="layui-input-block">
-                <input type="text" id="manufacturer_dept" name="manufacturer_dept"  placeholder="请输入联络部门" autocomplete="off" class="layui-input">
-            </div>
-        </div>
-
-
         <div class="layui-form-item layui-form-text">
             <label class="layui-form-label">备注</label>
             <div class="layui-input-block">
