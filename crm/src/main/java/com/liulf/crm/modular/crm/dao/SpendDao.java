@@ -119,7 +119,7 @@ public class SpendDao extends BaseDao {
             whereList.add(" s.`spend_date`>=? and s.`spend_date`<? ");
             queryPara.add(entity.getSpend_date());
             Calendar calendar = Calendar.getInstance();
-            calendar.setTime(entity.getCreate_time());
+            calendar.setTime(entity.getSpend_date());
             calendar.add(Calendar.DATE, 1);
             queryPara.add(calendar.getTime());
         }

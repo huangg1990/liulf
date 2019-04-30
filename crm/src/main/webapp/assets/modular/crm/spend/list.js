@@ -89,8 +89,9 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
      */
     dataTable.search = function () {
         var queryData = {};
-        queryData['spend_category_id'] = $("#spend_name").val();
-        queryData['spend_date'] = $("#spend_code").val();
+        queryData['spend_category_id'] = $("#spend_category_id").val();
+        queryData['spend_date'] = $("#spend_date").val();
+        queryData['user_id'] = $("#user_id").val();
         table.reload(dataTable.tableId, {where: queryData});
     };
 

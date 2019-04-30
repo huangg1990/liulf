@@ -8,6 +8,11 @@ layui.use(['layer', 'form', 'admin',  'laydate', 'ax'], function () {
 
     // 表单提交事件
     form.on('submit(btnSubmit)', function (data) {
+        var regex=/^[0-9]+([.]{1}[0-9]{1,2})?$/;
+        if(!regex.test(data.field.price)){
+            Feng.error("支出金额格式错误,最多支持2为小数");
+            return false;
+        }
         var ajax = new $ax(Feng.ctxPath + "/spend/add", function (data) {
             if(data.success){
                 Feng.success("添加成功！");

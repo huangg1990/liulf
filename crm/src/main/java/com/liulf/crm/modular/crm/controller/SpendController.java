@@ -34,7 +34,7 @@ public class SpendController extends CRMBaseController {
     private final static String PREFIX = "/modular/crm/spend/";
 
     @Autowired
-    SpendService SpendService;
+    SpendService spendService;
 
     @RequestMapping("/list")
     public String index() {
@@ -55,9 +55,9 @@ public class SpendController extends CRMBaseController {
         //获取分页参数
         Page page = LayuiPageFactory.defaultPage();
         try{
-            long total = SpendService.getPageCount(entity);
+            long total = spendService.getPageCount(entity);
             page.setTotal(total);
-            List<Spend> listData = SpendService.getPageList(page, entity);
+            List<Spend> listData = spendService.getPageList(page, entity);
             List<Map<String, Object>> result = BeanUtil.transBean2MapList(listData);
             page.setRecords(new LogWrapper(result).wrap());
         }catch (Exception e){
@@ -80,7 +80,7 @@ public class SpendController extends CRMBaseController {
             ShiroUser user = ShiroKit.getUser();
             entity.setUpdate_user(user.getId());
             entity.setCreate_user(user.getId());
-            SpendService.save(entity);
+            spendService.save(entity);
             return SUCCESS_TIP;
         }catch (Exception e){
             log.error("spend/add -error",e);
@@ -94,7 +94,7 @@ public class SpendController extends CRMBaseController {
         if (ToolUtil.isEmpty(spend_id)) {
             throw new RequestEmptyException();
         }
-        Spend entity = SpendService.getById(spend_id);
+        Spend entity = spendService.getById(spend_id);
         LogObjectHolder.me().set(entity);
         return PREFIX + "edit.html";
     }
@@ -109,7 +109,7 @@ public class SpendController extends CRMBaseController {
         try {
             ShiroUser user = ShiroKit.getUser();
             entity.setUpdate_user(user.getId());
-            SpendService.update(entity);
+            spendService.update(entity);
             return SUCCESS_TIP;
         } catch (Exception e) {
             log.error("spend/update -error", e);
@@ -121,7 +121,7 @@ public class SpendController extends CRMBaseController {
     @Permission
     @ResponseBody
     public Object detail(@PathVariable("spend_id") Long spend_id) {
-        Spend entity = SpendService.getById(spend_id);
+        Spend entity = spendService.getById(spend_id);
         return entity;
     }
 
@@ -137,7 +137,7 @@ public class SpendController extends CRMBaseController {
             for (String id : arrIds) {
                 listIds.add(Long.parseLong(id));
             }
-            SpendService.deleteById(listIds, user.getId());
+            spendService.deleteById(listIds, user.getId());
             return SUCCESS_TIP;
         }catch (Exception e){
             log.error("spend/delete -error",e);
