@@ -63,7 +63,10 @@ layui.define('jquery', function(exports){
             ,tabElem = $('.layui-tab[lay-filter='+ filter +']')
             ,titElem = tabElem.children(TITLE)
             ,liElem = titElem.find('>li[lay-id="'+ layid +'"]');
-        call.tabClick.call(liElem[0], null, null, liElem);
+
+        setTimeout(function () {
+            call.tabClick.call(liElem[0], null, null, liElem);
+        },200)
         return this;
     };
 
@@ -113,13 +116,6 @@ layui.define('jquery', function(exports){
                     elem: parents
                     ,index: index
                 });
-
-                var userAgent = window.navigator.userAgent;
-                if (userAgent.indexOf('Firefox') != -1) {
-                    //alert("reload");
-                    //window.location.reload();
-                    console.log("reload")
-                }
             }
 
             //Tab删除

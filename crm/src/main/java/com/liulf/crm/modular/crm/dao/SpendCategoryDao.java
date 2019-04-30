@@ -99,7 +99,7 @@ public class SpendCategoryDao extends BaseDao {
             "select \n" +
                     "`spend_category_id`,\n" +
                     "`spend_category_code`,\n" +
-                    "`spend_category_name`,\n" +
+                    "`spend_category_name` \n" +
                     "from dat_spend_category where `delete_flag`='N'";
 
     public List<SpendCategory> getAllList() {

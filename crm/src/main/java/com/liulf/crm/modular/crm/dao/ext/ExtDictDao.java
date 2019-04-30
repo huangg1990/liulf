@@ -1,13 +1,13 @@
-package com.liulf.crm.modular.crm.dao;
+package com.liulf.crm.modular.crm.dao.ext;
 
+import com.liulf.crm.modular.crm.dao.BaseDao;
 import com.liulf.crm.modular.system.entity.Dict;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-
-@Component("crmExtDictDao")
+@Component
 public class ExtDictDao extends BaseDao {
 
     private final static String getDictByCode_sql=
