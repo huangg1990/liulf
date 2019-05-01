@@ -31,17 +31,27 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
                     }
                 }
             },
-            {field: 'deal_date', sort: true, title: '交易日期'},
             {field: 'unit_price', sort: true, title: '单价'},
             {field: 'amount', sort: true, title: '数量'},
             {
                 field: 'amount', sort: true, title: '总价', templet: function (d) {
+
                     var total = parseInt(d.amount) * parseFloat(d.unit_price);
-                    if (d.stock_category == 'jinhuo') {
-                        return "<span style='color: red'>-" + total + "</span>";
+                    total=total.toFixed(2);
+                    if(d.payment_status=="zuofei"){
+                        if (d.stock_category == 'jinhuo') {
+                            return "<span style='color: red'><s>-" + total + "</s></span>";
+                        }else{
+                            return "<span style='color: green'><s>" + total + "</s></span>";
+                        }
                     }else{
-                        return "<span style='color: green'>" + total + "</span>";
+                        if (d.stock_category == 'jinhuo') {
+                            return "<span style='color: red'>-" + total + "</span>";
+                        }else{
+                            return "<span style='color: green'>" + total + "</span>";
+                        }
                     }
+
                 }
             },
             // {field: 'user_name', sort: true, title: '经手员工'},
@@ -64,7 +74,8 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
                    return "未知";
                 }
             },
-            {field: 'create_time', sort: true, title: '创建时间'},
+            // {field: 'create_time', sort: true, title: '创建时间'},
+            {field: 'deal_date', sort: true, title: '交易日期', templet: function (d) {  return d.deal_date.substr(0,10);  }  },
             {align: 'center', toolbar: '#tableBar', title: '操作', minWidth: 200}
         ]];
     };

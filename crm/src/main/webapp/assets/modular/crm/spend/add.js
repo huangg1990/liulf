@@ -10,7 +10,7 @@ layui.use(['layer', 'form', 'admin',  'laydate', 'ax'], function () {
     form.on('submit(btnSubmit)', function (data) {
         var regex=/^[0-9]+([.]{1}[0-9]{1,2})?$/;
         if(!regex.test(data.field.price)){
-            Feng.error("支出金额格式错误,最多支持2为小数");
+            Feng.error("支出金额格式错误,最多支持2位小数");
             return false;
         }
         var ajax = new $ax(Feng.ctxPath + "/spend/add", function (data) {

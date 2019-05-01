@@ -10,10 +10,10 @@ layui.use(['layer', 'form', 'admin',  'laydate', 'ax'], function () {
     form.on('submit(btnSubmit)', function (data) {
         var regex=/^[0-9]+([.]{1}[0-9]{1,2})?$/;
         if(!regex.test(data.field.unit_price)){
-            Feng.error("单价格式错误,最多支持2为小数");
+            Feng.error("单价格式错误,最多支持2位小数");
             return false;
         }
-        regex='/[1-9]{1}\d+/';
+        regex=/^[1-9]\d*$/;
         if(!regex.test(data.field.amount)|| data.field.amount<=0 || data.field.amount>=99999){
             Feng.error("数量格式错误,只支持正整数。区间1-99999");
             return false;
