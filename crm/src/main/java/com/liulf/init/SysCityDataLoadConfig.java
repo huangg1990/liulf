@@ -14,7 +14,7 @@ public class SysCityDataLoadConfig {
     private static List<SysCity> ALL_CITIES_LIST = null;
 
     public static final int ROOT_ID = 100000;
-    //public static final String filejson = System.getProperty("user.home") + "/ybj/sys_city.json";
+    public static final String filejson = System.getProperty("user.home") + "/sys_city.json";
 
     private static void init() {
 
@@ -28,9 +28,9 @@ public class SysCityDataLoadConfig {
     private static void loadData() {
         try {
             ALL_CITIES_LIST = new ArrayList();
-            File sys_cityFile = ResourceUtils.getFile("classpath:data/sys_city.json"); //类路径
-            //            File sys_cityFile = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "data/sys_city.json");
-            //File sys_cityFile = new File(filejson);
+            //File sys_cityFile = ResourceUtils.getFile("classpath:data/sys_city.json"); //类路径
+            //File sys_cityFile = ResourceUtils.getFile(ResourceUtils.CLASSPATH_URL_PREFIX + "data/sys_city.json");
+            File sys_cityFile = new File(filejson);
             String cityJson = ReadFile(sys_cityFile.getPath());
 
             JSONObject jsonObject = JSON.parseObject(cityJson);
