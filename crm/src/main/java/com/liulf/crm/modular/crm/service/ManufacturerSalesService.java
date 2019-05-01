@@ -39,4 +39,8 @@ public class ManufacturerSalesService extends BaseService {
     public List<ManufacturerSales> getPageList(Page page, ManufacturerSales entity) {
         return manufacturerSalesDao.getPageList(page, entity);
     }
+
+    public List<ManufacturerSales> getListByManufacturerId(String manufacturerId){
+        return manufacturerSalesDao.getListByManufacturerId(manufacturerId);
+    }
 }

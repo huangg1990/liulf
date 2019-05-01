@@ -86,10 +86,10 @@ public class ManufacturerSalesDao extends BaseDao {
     private final static String getById_sql =
             "select \n" +
                     "m.`province`,\n" +
-                    "m.`city`,"+
+                    "m.`city`," +
                     "m.`area`,\n" +
                     "m.`manufacturer_name`,\n" +
-                    "ms.`sales_id`, \n"+
+                    "ms.`sales_id`, \n" +
                     "ms.`manufacturer_id`,\n" +
                     "ms.`sales_name`,\n" +
                     "ms.`sales_addr`," +
@@ -100,7 +100,7 @@ public class ManufacturerSalesDao extends BaseDao {
                     "ms.`create_user`,\n" +
                     "ms.`update_time`,\n" +
                     "ms.`update_user` \n" +
-                    "from dat_manufacturer_sales ms \n"+
+                    "from dat_manufacturer_sales ms \n" +
                     "inner join dat_manufacturer m\n" +
                     "on ms.manufacturer_id=m.manufacturer_id  where ms.`delete_flag`='N' AND ms.`sales_id`=?";
 
@@ -149,17 +149,17 @@ public class ManufacturerSalesDao extends BaseDao {
 
     public Long getPageCount(ManufacturerSales entity) {
         List<Object> para = new LinkedList<>();
-        String tempSQL = getPageCount_sql.replace("#and#" , getWhereSql(entity, para));
+        String tempSQL = getPageCount_sql.replace("#and#", getWhereSql(entity, para));
         return liulfJdbcTemplate.queryForObject(tempSQL, para.toArray(), Long.class);
     }
 
     private final static String getPageList_sql =
             "select \n" +
                     "m.`province`,\n" +
-                    "m.`city`,"+
+                    "m.`city`," +
                     "m.`area`,\n" +
                     "m.`manufacturer_name`,\n" +
-                    "ms.`sales_id`, \n"+
+                    "ms.`sales_id`, \n" +
                     "ms.`manufacturer_id`,\n" +
                     "ms.`sales_name`,\n" +
                     "ms.`sales_addr`," +
@@ -170,7 +170,7 @@ public class ManufacturerSalesDao extends BaseDao {
                     "ms.`create_user`,\n" +
                     "ms.`update_time`,\n" +
                     "ms.`update_user` \n" +
-                    "from dat_manufacturer_sales ms \n"+
+                    "from dat_manufacturer_sales ms \n" +
                     "inner join dat_manufacturer m\n" +
                     "on ms.manufacturer_id=m.manufacturer_id #and#";
 
@@ -181,6 +181,22 @@ public class ManufacturerSalesDao extends BaseDao {
         para.add((page.getCurrent() - 1) * page.getSize());
         para.add(page.getSize());
         List<ManufacturerSales> list = liulfJdbcTemplate.query(tempSQL, para.toArray(), new BeanPropertyRowMapper(ManufacturerSales.class));
+        return list;
+    }
+
+
+    private final static String getListByManufacturerId_sql =
+            "select \n" +
+                    "`sales_id`, \n" +
+                    "`sales_name`\n" +
+                    "from dat_manufacturer_sales \n" +
+                    "where manufacturer_id=?";
+
+    public List<ManufacturerSales> getListByManufacturerId(String manufacturerId) {
+        List<ManufacturerSales> list = liulfJdbcTemplate.query(getListByManufacturerId_sql,
+                new Object[]{
+                        manufacturerId
+                }, new BeanPropertyRowMapper(ManufacturerSales.class));
         return list;
     }
 }

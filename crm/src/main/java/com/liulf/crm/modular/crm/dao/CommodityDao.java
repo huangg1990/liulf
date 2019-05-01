@@ -106,7 +106,7 @@ public class CommodityDao extends BaseDao {
             "select \n" +
                     "`commodity_id`,\n"+
                     "`commodity_code`,\n" +
-                    "`commodity_name`,\n" +
+                    "`commodity_name`\n" +
                     "from dat_commodity where `delete_flag`='N' and `category_id`=?";
     public List<Commodity> getByCategoryId(String category_id){
         List<Commodity> list = liulfJdbcTemplate.query(getByCategoryId_sql,new Object[]{category_id}, new BeanPropertyRowMapper(Commodity.class));

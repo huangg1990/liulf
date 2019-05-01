@@ -172,6 +172,18 @@ public class CommodityStockDao extends BaseDao {
             whereList.add(" m.`manufacturer_id`=?");
             queryPara.add(entity.getCategory_id());
         }
+        if (!ToolUtil.isEmpty(entity.getProvince())) {
+            whereList.add(" m.`province`=? ");
+            queryPara.add(entity.getProvince());
+        }
+        if (!ToolUtil.isEmpty(entity.getCity())) {
+            whereList.add(" m.`city`=? ");
+            queryPara.add(entity.getCity());
+        }
+        if (!ToolUtil.isEmpty(entity.getArea())) {
+            whereList.add(" m.`area`=? ");
+            queryPara.add(entity.getArea());
+        }
         if (whereList.size() == 0)
             return "";
         return " where " + Joiner.on(" and ").join(whereList);
@@ -196,8 +208,8 @@ public class CommodityStockDao extends BaseDao {
                     " `create_time`,\n" +
                     " `create_user`,\n" +
                     " `update_time`,\n" +
-                    " `update_user`)\n" +
-                    "from dat_commodity_stock where cs.`delete_flag`='N' #and#) cs\n" +
+                    " `update_user`\n" +
+                    "from dat_commodity_stock where `delete_flag`='N' #and#) cs\n" +
                     "inner join dat_commodity c \n" +
                     "on cs.commodity_id=c.commodity_id\n" +
                     "inner join dat_manufacturer_sales ms \n" +
@@ -238,8 +250,8 @@ public class CommodityStockDao extends BaseDao {
                     " `create_time`,\n" +
                     " `create_user`,\n" +
                     " `update_time`,\n" +
-                    " `update_user`)\n" +
-                    "from dat_commodity_stock where cs.`delete_flag`='N' #and#) cs\n" +
+                    " `update_user`\n" +
+                    "from dat_commodity_stock where `delete_flag`='N' #and#) cs\n" +
                     "inner join dat_commodity c \n" +
                     "on cs.commodity_id=c.commodity_id\n" +
                     "inner join dat_manufacturer_sales ms \n" +
@@ -251,7 +263,7 @@ public class CommodityStockDao extends BaseDao {
 
     public List<CommodityStock> getPageList(Page page, CommodityStock entity) {
         List<Object> para = new LinkedList<>();
-        String tempSQL = getPageCount_sql.replace("#and#", getWhereSql(entity, para));
+        String tempSQL = getPageList_sql.replace("#and#", getWhereSql(entity, para));
         tempSQL = tempSQL.replace("#and2#", getWhereSql2(entity, para));
         tempSQL += " order by cs.create_time desc limit ?,?";
         para.add((page.getCurrent() - 1) * page.getSize());
