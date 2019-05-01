@@ -7,7 +7,7 @@ layui.use(['layer', 'form', 'admin',  'laydate', 'ax'], function () {
     var laydate = layui.laydate;
 
     //获取信息
-    var ajax = new $ax(Feng.ctxPath + "/commodity_stock/detail/" + Feng.getUrlParam("stock_id"));
+    var ajax = new $ax(Feng.ctxPath + "/commodity_sell/detail/" + Feng.getUrlParam("sell_id"));
     var result = ajax.start();
 
     debugger
@@ -25,7 +25,7 @@ layui.use(['layer', 'form', 'admin',  'laydate', 'ax'], function () {
             Feng.error("数量格式错误,只支持正整数。区间1-99999");
             return false;
         }
-        var ajax = new $ax(Feng.ctxPath + "/commodity_stock/update", function (data) {
+        var ajax = new $ax(Feng.ctxPath + "/commodity_sell/update", function (data) {
             if(data.success){
                 Feng.success("操作成功！");
                 //传给上个页面，刷新table用
@@ -41,6 +41,7 @@ layui.use(['layer', 'form', 'admin',  'laydate', 'ax'], function () {
         ajax.set(data.field);
         ajax.start();
     });
+
 
     // ==========================省市级联========================== //
     var initSelect = function (title,id, pid, levelType,selectval,url) {
@@ -71,46 +72,15 @@ layui.use(['layer', 'form', 'admin',  'laydate', 'ax'], function () {
         elem: '#deal_date'
     });
 
-    form.on('select(province)', function (data) {
-        clear_select("city");
-        clear_select("area");
-        clear_select("manufacturer_id");
-        clear_select("manufacturer_sales_id");
-        initSelect("城市", "city", data.value, 2);
-    });
-    form.on('select(city)', function (data) {
-        clear_select("area");
-        clear_select("manufacturer_id");
-        clear_select("manufacturer_sales_id");
-        initSelect("县/区", "area", data.value, 3);
-    });
-    form.on('select(area)', function (data) {
-        clear_select("manufacturer_id");
-        clear_select("manufacturer_sales_id");
-        initSelect("厂商", "manufacturer_id", data.value, 4, undefined, Feng.ctxPath + "/manufacturer/select");
-    });
-
-    form.on('select(manufacturer_id)', function (data) {
-        clear_select("manufacturer_sales_id");
-        initSelect("厂商业务员", "manufacturer_sales_id", data.value, 4, undefined, Feng.ctxPath + "/manufacturer_sales/select");
-    });
-
     form.on('select(category_id)', function (data) {
         clear_select("commodity_id");
-        initSelect("商品名称", "commodity_id", data.value, 0, "", Feng.ctxPath + "/commodity/select");
+        initSelect("商品名称", "commodity_id", data.value, 1, "", Feng.ctxPath + "/commodity/select");
     });
-    initSelect("省份", "province", 100000, 1,result.province);
-    initSelect("城市", "city", result.province, 2,result.city);
-    initSelect("县/区", "area", result.city, 3,result.area);
-    initSelect("厂商", "manufacturer_id", result.area, 4, result.manufacturer_id, Feng.ctxPath + "/manufacturer/select");
-    initSelect("厂商业务员", "manufacturer_sales_id", result.manufacturer_id, 5, result.manufacturer_sales_id, Feng.ctxPath + "/manufacturer_sales/select");
+    initSelect("商品分类", "category_id", undefined, 0, result.category_id, Feng.ctxPath + "/commodity_category/select");
+    initSelect("商品名称", "commodity_id", result.category_id, 1, result.commodity_id, Feng.ctxPath + "/commodity/select");
 
-    initSelect("商品分类", "category_id", undefined, 1, result.category_id, Feng.ctxPath + "/commodity_category/select");
-    initSelect("商品名称", "commodity_id", result.category_id, 2, result.commodity_id, Feng.ctxPath + "/commodity/select");
+    initSelect("经手员工", "user_id", undefined, 0, result.user_id, Feng.ctxPath + "/extuser/select");
 
-    initSelect("经手员工", "user_id", undefined, 1, result.user_id, Feng.ctxPath + "/extuser/select");
-
-    initSelect("支付状态", "payment_status", undefined, 1, result.payment_status, Feng.ctxPath + "/extdict/list?pcode=payment_status");
-    initSelect("进/出货", "stock_category", undefined, 1, result.stock_category, Feng.ctxPath + "/extdict/list?pcode=stock_category");
+    initSelect("支付状态", "payment_status", undefined, 0, result.payment_status, Feng.ctxPath + "/extdict/list?pcode=payment_status");
 
 });

@@ -40,9 +40,9 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
                     total=total.toFixed(2);
                     if(d.payment_status=="zuofei"){
                         if (d.stock_category == 'jinhuo') {
-                            return "<span style='color: red'><s>-" + total + "</s></span>";
+                            return "<span style=''><s>-" + total + "</s></span>";
                         }else{
-                            return "<span style='color: green'><s>" + total + "</s></span>";
+                            return "<span style=''><s>" + total + "</s></span>";
                         }
                     }else{
                         if (d.stock_category == 'jinhuo') {

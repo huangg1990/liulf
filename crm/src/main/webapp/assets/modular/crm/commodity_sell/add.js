@@ -90,4 +90,6 @@ layui.use(['layer', 'form', 'admin',  'laydate', 'ax'], function () {
     initSelect("经手员工", "user_id", undefined, 1, undefined, Feng.ctxPath + "/extuser/select");
 
     initSelect("支付状态", "payment_status", undefined, 1, undefined, Feng.ctxPath + "/extdict/list?pcode=payment_status");
+
+
 });

@@ -93,42 +93,35 @@ public class CommoditySellDao extends BaseDao {
 
     private final static String getById_sql =
         "select \n" +
-        "cs.*,\n" +
-        "c.category_id,\n" +
-        "c.commodity_name,\n" +
-        "m.manufacturer_id,\n" +
-        "m.manufacturer_name,\n" +
-        "m.province,\n" +
-        "m.city,\n" +
-        "m.area,\n" +
-        "cc.category_name\n" +
-        "from \n" +
-        "(\n" +
-        "select \n" +
-        " `sell_id`,\n" +
-        " `commodity_id`,\n" +
-        " `unit_price`,\n" +
-        " `amount`,\n" +
-        " `stock_category`,\n" +
-        " `deal_date`,\n" +
-        " `user_id`,\n" +
-        " `payment_status`,\n" +
-        " `manufacturer_sales_id`,\n" +
-        " `note`,\n" +
-        " `delete_flag`,\n" +
-        " `create_time`,\n" +
-        " `create_user`,\n" +
-        " `update_time`,\n" +
-        " `update_user`\n" +
-        "from dat_commodity_sell where `delete_flag`='N' and `sell_id`=?) cs\n" +
-        "inner join dat_commodity c \n" +
-        "on cs.commodity_id=c.commodity_id\n" +
-        "inner join dat_manufacturer_sales ms \n" +
-        "on cs.manufacturer_sales_id=ms.sales_id\n" +
-        "inner join dat_manufacturer m \n" +
-        "on m.manufacturer_id=ms.manufacturer_id\n" +
-        "inner join dat_commodity_category cc\n" +
-        "on c.category_id=cc.category_id";
+                "cs.*,\n" +
+                "c.category_id,\n" +
+                "c.commodity_name,\n" +
+                "cu.customer_name,\n"+
+                "cc.category_name\n" +
+                "from \n" +
+                "(\n" +
+                "select \n" +
+                " `sell_id`,\n" +
+                " `commodity_id`,\n" +
+                " `unit_price`,\n" +
+                " `amount`, \n" +
+                " `deal_date`,\n" +
+                " `user_id`,\n" +
+                " `payment_status`,\n" +
+                " `customer_id`,\n" +
+                " `note`,\n" +
+                " `delete_flag`,\n" +
+                " `create_time`,\n" +
+                " `create_user`,\n" +
+                " `update_time`,\n" +
+                " `update_user`\n" +
+                "from dat_commodity_sell where `delete_flag`='N' and `sell_id`=?) cs\n" +
+                " inner join dat_customer cu\n" +
+                " on cu.customer_id=cs.customer_id\n" +
+                "inner join dat_commodity c \n" +
+                "on cs.commodity_id=c.commodity_id\n" +
+                "inner join dat_commodity_category cc\n" +
+                "on c.category_id=cc.category_id";
 
 
     public CommoditySell getById(Long id) {
