@@ -363,8 +363,8 @@ CREATE TABLE `sys_operation_log` (
 -- Records of sys_operation_log
 -- ----------------------------
 BEGIN;
-INSERT INTO `sys_operation_log` VALUES (1119273166435282945, '业务日志', '修改菜单', 1, 'com.liulf.crm.modular.system.controller.MenuController', 'edit', '2019-04-20 00:14:53', '成功', '菜单名称=员工管理;;;字段名称:菜单名称,旧值:作品管理,新值:员工管理;;;字段名称:url地址,旧值:design,新值:employe');
-INSERT INTO `sys_operation_log` VALUES (1119273290242748418, '业务日志', '修改菜单', 1, 'com.liulf.crm.modular.system.controller.MenuController', 'edit', '2019-04-20 00:15:22', '成功', '菜单名称=用户管理;;;');
+INSERT INTO `sys_operation_log` VALUES (1119273166435282945, '业务日志', '修改菜单', 1, 'com.liulf.liulflf.modular.system.controller.MenuController', 'edit', '2019-04-20 00:14:53', '成功', '菜单名称=员工管理;;;字段名称:菜单名称,旧值:作品管理,新值:员工管理;;;字段名称:url地址,旧值:design,新值:employe');
+INSERT INTO `sys_operation_log` VALUES (1119273290242748418, '业务日志', '修改菜单', 1, 'com.liulf.liulflf.modular.system.controller.MenuController', 'edit', '2019-04-20 00:15:22', '成功', '菜单名称=用户管理;;;');
 COMMIT;
 
 -- ----------------------------

@@ -30,14 +30,14 @@ spring:
       max-file-size: 100MB
 
 mybatis-plus:
-  typeAliasesPackage: com.liulf.crm.modular.system.model
+  typeAliasesPackage: com.liulf.modular.system.model
 
 #spring boot 2.0 版本已经 把  /info 移动到了   /actuator/info  ,  通过如下配置恢复 /info
 management.endpoints.web.base-path: /
 
 
 log:
-  path: crm-logs
+  path: liulf-logs
 
 
 # city_data  https://6c65-leeson-a5fee7-1257914072.tcb.qcloud.la/666/cityDataArr.json?sign=30a3c877aeb945f6b6e0419237fb126b&t=1541577824

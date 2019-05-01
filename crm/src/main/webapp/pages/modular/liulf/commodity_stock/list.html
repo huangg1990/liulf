@@ -1,0 +1,80 @@
+@layout("/common/_container.html",{js:["/assets/modular/liulf/commodity_stock/list.js"]}){
+
+<div class="layui-body-header">
+    <span class="layui-body-header-title">进/退货管理</span>
+</div>
+
+<div class="layui-fluid">
+    <div class="layui-row layui-col-space15">
+        <div class="layui-col-xs12">
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <div class="layui-form toolbar">
+                        <div class="layui-form-item">
+                            <div class="layui-inline">
+                                <select name="province" id="province" lay-filter="province"> </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="city" id="city" lay-filter="city"> </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="area" id="area" lay-filter="area"> </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="manufacturer_id" id="manufacturer_id" lay-filter="manufacturer_id"> </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="manufacturer_sales_id" id="manufacturer_sales_id" lay-filter="manufacturer_sales_id"> </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="category_id" id="category_id" lay-filter="category_id"> </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="commodity_id" id="commodity_id" lay-filter="commodity_id"> </select>
+                            </div>
+                            <!--<div class="layui-inline">-->
+                                <!--<select name="user_id" id="user_id" lay-filter="user_id"> </select>-->
+                            <!--</div>-->
+                            <div class="layui-inline">
+                                <select name="payment_status" id="payment_status" lay-filter="payment_status"> </select>
+                            </div>
+                            <div class="layui-inline">
+                                <select name="stock_category" id="stock_category" lay-filter="stock_category"> </select>
+                            </div>
+                            <div class="layui-inline">
+                                <input id="deal_date" class="layui-input"   maxlength="20" type="text" placeholder="进/退货日期"/>
+                            </div>
+
+                            <div class="layui-inline">
+                                <button id="btnSearch" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索
+                                </button>
+                                @if(shiro.hasPermission("/commodity_stock/add")){
+                                <button id="btnAdd" class="layui-btn icon-btn"><i class="layui-icon">&#xe654;</i>进/退货
+                                </button>
+                                @}
+                                @if(shiro.hasPermission("/commodity_stock/delete")){
+                                <!--<button id="btnDeleteBatch" class="layui-btn icon-btn layui-btn-danger"><i class="layui-icon">&#xe67d;</i>批量作废</button>-->
+                                @}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="layui-table" id="dataTable" lay-filter="dataTable"></table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--   操作列模板   -->
+<script type="text/html" id="tableBar">
+    {{# if (d.delete_flag == 'N'){ }}
+        <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+        <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="delete">删除</a>
+    {{# }else {  }}
+
+    {{# }  }}
+</script>
+
+
+@}

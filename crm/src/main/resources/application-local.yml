@@ -5,10 +5,10 @@ spring:
     username: root
     password: root
     filters: wall,mergeStat
-    data-source-name: crm
+    data-source-name: liulf
 
 #多数据源情况的配置
-#crm:
+#liulf:
 #  muti-datasource:
 #    open: false
 #    driver-class-name: com.mysql.cj.jdbc.Driver
