@@ -27,7 +27,7 @@ public class CommodityStockDao extends BaseDao {
                     "`create_user`,\n" +
                     "`update_time`,\n" +
                     "`update_user`)\n" +
-                    "values(?,?,?,?,?,?,?,?,?,?);";
+                    "values(?,?,?,?,?,?,?,?,?,?,?,?,?,?);";
 
     public void save(CommodityStock entity) {
         Object[] para = new Object[]{
@@ -133,24 +133,28 @@ public class CommodityStockDao extends BaseDao {
     private String getWhereSql(CommodityStock entity, List<Object> queryPara) {
         List<String> whereList = new ArrayList<>();
         if (!ToolUtil.isEmpty(entity.getCommodity_id())) {
-            whereList.add(" cs.`commodity_id`=?");
+            whereList.add(" `commodity_id`=?");
             queryPara.add(entity.getCommodity_id());
         }
         if (!ToolUtil.isEmpty(entity.getUser_id())) {
-            whereList.add(" cs.`user_id`=?");
+            whereList.add(" `user_id`=?");
             queryPara.add(entity.getUser_id());
         }
         if (!ToolUtil.isEmpty(entity.getPayment_status())) {
-            whereList.add(" cs.`stock_category`=?");
+            whereList.add(" `payment_status`=?");
             queryPara.add(entity.getPayment_status());
         }
+        if (!ToolUtil.isEmpty(entity.getStock_category())) {
+            whereList.add(" `stock_category`=?");
+            queryPara.add(entity.getStock_category());
+        }
         if (!ToolUtil.isEmpty(entity.getManufacturer_sales_id())) {
-            whereList.add(" cs.`manufacturer_sales_id`=?");
+            whereList.add(" `manufacturer_sales_id`=?");
             queryPara.add(entity.getManufacturer_sales_id());
         }
 
         if (!ToolUtil.isEmpty(entity.getDeal_date())) {
-            whereList.add(" cs.`CommodityStock_date`>=? and cs.`CommodityStock_date`<? ");
+            whereList.add(" `deal_date`>=? and `deal_date`<? ");
             queryPara.add(entity.getDeal_date());
             Calendar calendar = Calendar.getInstance();
             calendar.setTime(entity.getDeal_date());
@@ -168,9 +172,9 @@ public class CommodityStockDao extends BaseDao {
             whereList.add(" c.`category_id`=?");
             queryPara.add(entity.getCategory_id());
         }
-        if (!ToolUtil.isEmpty(entity.getCategory_id())) {
+        if (!ToolUtil.isEmpty(entity.getManufacturer_id())) {
             whereList.add(" m.`manufacturer_id`=?");
-            queryPara.add(entity.getCategory_id());
+            queryPara.add(entity.getManufacturer_id());
         }
         if (!ToolUtil.isEmpty(entity.getProvince())) {
             whereList.add(" m.`province`=? ");
@@ -265,7 +269,7 @@ public class CommodityStockDao extends BaseDao {
         List<Object> para = new LinkedList<>();
         String tempSQL = getPageList_sql.replace("#and#", getWhereSql(entity, para));
         tempSQL = tempSQL.replace("#and2#", getWhereSql2(entity, para));
-        tempSQL += " order by cs.create_time desc limit ?,?";
+        tempSQL += " order by cs.deal_date desc limit ?,?";
         para.add((page.getCurrent() - 1) * page.getSize());
         para.add(page.getSize());
         List<CommodityStock> list = liulfJdbcTemplate.query(tempSQL, para.toArray(), new BeanPropertyRowMapper(CommodityStock.class));

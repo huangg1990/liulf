@@ -24,9 +24,9 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
             {field: 'commodity_name', sort: true, title: '商品名称'},
             {
                 field: 'stock_category', sort: true, title: '进/退货', templet: function (d) {
-                    if (d.stock_category == '1') {
+                    if (d.stock_category == 'jinhuo') {
                         return "<span>进货</span>";
-                    } else if (d.stock_category == '2') {
+                    } else if (d.stock_category == 'tuihuo') {
                         return "<span>退货</span>";
                     }
                 }
@@ -37,17 +37,31 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
             {
                 field: 'amount', sort: true, title: '总价', templet: function (d) {
                     var total = parseInt(d.amount) * parseFloat(d.unit_price);
-                    return "<span>" + total + "</span>";
+                    if (d.stock_category == 'jinhuo') {
+                        return "<span style='color: red'>-" + total + "</span>";
+                    }else{
+                        return "<span style='color: green'>" + total + "</span>";
+                    }
                 }
             },
-            {field: 'user_name', sort: true, title: '经手人'},
+            // {field: 'user_name', sort: true, title: '经手员工'},
+            // {
+            //     field: 'delete_flag', sort: true, title: '状态', templet: function (d) {
+            //         if (d.delete_flag == 'Y') {
+            //             return "<span>已删除</span>";
+            //         } else {
+            //             return "<span>正常</span>";
+            //         }
+            //     }
+            // },
             {
-                field: 'delete_flag', sort: true, title: '状态', templet: function (d) {
-                    if (d.delete_flag == 'Y') {
-                        return "<span>已删除</span>";
-                    } else {
-                        return "<span>正常</span>";
-                    }
+                field: 'payment_status', sort: true, title: '支付状态', templet: function (d) {
+                   switch (d.payment_status) {
+                       case "yikaipiao" :return "已开票";// 3.
+                       case "yizhifu" :return "已支付";
+                       case "zuofei" :return "作废";
+                   }
+                   return "未知";
                 }
             },
             {field: 'create_time', sort: true, title: '创建时间'},
@@ -75,7 +89,7 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
         top.layui.admin.open({
             type: 2,
             title: '编辑进/退货',
-            area: ['800px', '640px'],
+            area: ['1000px', '640px'],
             content: Feng.ctxPath + '/commodity_stock/view_update?stock_id=' + data.stock_id,
             end: function () {
                 admin.getTempData('formOk') && table.reload(dataTable.tableId);
@@ -135,7 +149,7 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
         top.layui.admin.open({
             type: 2,
             title: '添加进/退货',
-            area: ['800px', '640px'],
+            area: ['1000px', '640px'],
             content: Feng.ctxPath + '/commodity_stock/view_add',
             end: function () {
                 admin.getTempData('formOk') && table.reload(dataTable.tableId);
@@ -257,7 +271,7 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
         initSelect("商品名称", "commodity_id", data.value, 0, "", Feng.ctxPath + "/commodity/select");
     });
 
-    initSelect("经手员工", "user_id", undefined, 1, undefined, Feng.ctxPath + "/extuser/select");
+    // initSelect("经手员工", "user_id", undefined, 1, undefined, Feng.ctxPath + "/extuser/select");
 
     initSelect("支付状态", "payment_status", undefined, 1, undefined, Feng.ctxPath + "/extdict/list?pcode=payment_status");
     initSelect("进/出货", "stock_category", undefined, 1, undefined, Feng.ctxPath + "/extdict/list?pcode=stock_category");

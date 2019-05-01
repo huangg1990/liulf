@@ -32,4 +32,7 @@ public class CommodityStock extends BaseEntity implements Serializable {
     private String province;//varchar(20) DEFAULT NULL COMMENT '省',
     private String city;//varchar(20) DEFAULT NULL COMMENT '市',
     private String area;// 地区编码
+
+
+    private String commodity_name;
 }
