@@ -1,4 +1,4 @@
-@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/crm/commodity_stock/edit.js"]}){
+@layout("/common/_container.html",{bg:"bg-white",js:["/assets/modular/crm/commodity_sell/edit.js"]}){
 <form  id="editForm" lay-filter="editForm" class="layui-form model-form">
     <input id="stock_id" name="stock_id" type="hidden"/>
     <div class="layui-form-item">
@@ -57,7 +57,7 @@
             </div>
             <div class="layui-inline">
                 <input type="text" id="amount" name="amount" required lay-verify="required|number"
-                       placeholder=" 区间1-99999" autocomplete="off" class="layui-input">
+                       placeholder="请输入数量【区间1-99999】" autocomplete="off" class="layui-input">
             </div>
         </div>
 

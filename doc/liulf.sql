@@ -127,7 +127,7 @@ DROP TABLE IF EXISTS `dat_spend`;
  ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
 
- -- 进/出货
+ -- 进/退货
 DROP TABLE IF EXISTS `dat_commodity_stock`;
  CREATE TABLE `dat_commodity_stock` (
  `stock_id` INT(10) NOT NULL  AUTO_INCREMENT COMMENT '支出ID',
@@ -146,6 +146,28 @@ DROP TABLE IF EXISTS `dat_commodity_stock`;
  `update_time` DATETIME DEFAULT NULL COMMENT '修改时间',
  `update_user` BIGINT(20) DEFAULT NULL COMMENT '修改用户ID',
  PRIMARY KEY (`stock_id`) USING BTREE
+ ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
+
+
+
+  -- 出货
+DROP TABLE IF EXISTS `dat_commodity_sell`;
+ CREATE TABLE `dat_commodity_sell` (
+ `sell_id` INT(10) NOT NULL  AUTO_INCREMENT COMMENT '支出ID',
+ `commodity_id` INT(10) NOT NULL  COMMENT '商品ID',
+ `unit_price` DECIMAL(10,2) DEFAULT NULL COMMENT '单价',
+ `amount` INT(10) NOT NULL  COMMENT '数量',
+ `payment_status` VARCHAR(32) DEFAULT NULL COMMENT '支付状态',
+ `deal_date` DATETIME DEFAULT NULL COMMENT '交易日期',
+ `user_id` BIGINT(20) DEFAULT NULL COMMENT '经手员工ID',
+ `note` VARCHAR(1024) DEFAULT NULL COMMENT '备注',
+ `customer_id` INT(10) NOT NULL  COMMENT '客户id',
+ `delete_flag` VARCHAR(1) DEFAULT NULL COMMENT '删除标志位 N 未删除  Y 已删除',
+ `create_time` DATETIME DEFAULT NULL COMMENT '创建时间',
+ `create_user` BIGINT(20) DEFAULT NULL COMMENT '创建用户ID',
+ `update_time` DATETIME DEFAULT NULL COMMENT '修改时间',
+ `update_user` BIGINT(20) DEFAULT NULL COMMENT '修改用户ID',
+ PRIMARY KEY (`sell_id`) USING BTREE
  ) ENGINE=INNODB DEFAULT CHARSET=utf8mb4;
 
 
