@@ -56,7 +56,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         form.render();
     };
 
-    initSelect("","province", 100000, 1);
+    initSelect("省份", "province", 100000, 1,"340000");
+    initSelect("市","city", "340000", 2,"");
     initSelect("性别","gender", undefined, 0,"",Feng.ctxPath +"/extdict/list?pcode=SEX");
 
     form.on('select(province)', function(data){
@@ -80,5 +81,7 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         clear_select("car_basic_id");
         initSelect("车款","car_basic_id", data.value, 0,"",Feng.ctxPath +"/car/car_basic_select");
     });
+
+    $("#province").trigger("change");
 
 });

@@ -236,7 +236,10 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
         clear_select("area");
         initSelect("", "area", data.value, 3);
     });
-    initSelect("", "province", 100000, 1);
+    initSelect("省份", "province", 100000, 1,"340000");
+    initSelect("市","city", "340000", 2,"");
     initSelect("性别", "gender", undefined, 0, "", Feng.ctxPath + "/extdict/list?pcode=SEX");
     // ==========================省市级联========================== //
+
+
 });

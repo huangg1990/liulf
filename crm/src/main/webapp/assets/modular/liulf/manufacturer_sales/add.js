@@ -56,8 +56,8 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         form.render();
     };
 
-    initSelect("","province", 100000, 1);
-
+    initSelect("省份", "province", 100000, 1,"340000");
+    initSelect("市","city", "340000", 2,"");
     form.on('select(province)', function(data){
         clear_select("city");
         clear_select("area");
@@ -73,4 +73,6 @@ layui.use(['layer', 'form', 'admin', 'laydate', 'ax'], function () {
         clear_select("manufacturer_id");
         initSelect("厂商","manufacturer_id", data.value,4, undefined, Feng.ctxPath +"/manufacturer/select");
     });
+
+    $("#province").trigger("change");
 });

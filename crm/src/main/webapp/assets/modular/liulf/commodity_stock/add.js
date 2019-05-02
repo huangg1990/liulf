@@ -92,11 +92,12 @@ layui.use(['layer', 'form', 'admin',  'laydate', 'ax'], function () {
         clear_select("commodity_id");
         initSelect("商品名称", "commodity_id", data.value, 0, "", Feng.ctxPath + "/commodity/select");
     });
-    initSelect("省份", "province", 100000, 1);
-
+    initSelect("省份", "province", 100000, 1,"340000");
+    initSelect("市","city", "340000", 2,"");
     initSelect("经手员工", "user_id", undefined, 1, undefined, Feng.ctxPath + "/extuser/select");
 
     initSelect("支付状态", "payment_status", undefined, 1, undefined, Feng.ctxPath + "/extdict/list?pcode=payment_status");
     initSelect("进/出货", "stock_category", undefined, 1, undefined, Feng.ctxPath + "/extdict/list?pcode=stock_category");
 
+    $("#province").trigger("change");
 });

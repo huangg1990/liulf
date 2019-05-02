@@ -277,8 +277,8 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
     });
 
 
-    initSelect("省份", "province", 100000, 1);
-
+    initSelect("省份", "province", 100000, 1,"340000");
+    initSelect("市","city", "340000", 2,"");
     initSelect("商品分类", "category_id", undefined, 0, "", Feng.ctxPath + "/commodity_category/select");
     form.on('select(category_id)', function (data) {
         clear_select("commodity_id");
@@ -290,6 +290,6 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin', 'form'], function () {
     initSelect("支付状态", "payment_status", undefined, 1, undefined, Feng.ctxPath + "/extdict/list?pcode=payment_status");
     initSelect("进/出货", "stock_category", undefined, 1, undefined, Feng.ctxPath + "/extdict/list?pcode=stock_category");
 
-
+    $("#province").trigger("change");
 
 });

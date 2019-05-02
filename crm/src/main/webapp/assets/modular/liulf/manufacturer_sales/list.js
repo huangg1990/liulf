@@ -197,8 +197,8 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
         form.render();
     };
 
-    initSelect("省份","province", 100000, 1); //
-
+    initSelect("省份", "province", 100000, 1,"340000");
+    initSelect("市","city", "340000", 2,"");
 
     form.on('select(province)', function(data){
         clear_select("city");
@@ -216,4 +216,6 @@ layui.use(['layer', 'table', 'ax', 'laydate', 'admin','form'], function () {
         initSelect("厂商","manufacturer_id", data.value,4, undefined, Feng.ctxPath +"/manufacturer/select");
     });
     // ==========================省市级联========================== //
+
+    $("#province").trigger("change");
 });
